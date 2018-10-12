@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const actors = require('./routers/actor');
 const movies = require('./routers/movie');
 const app = express();
-app.listen(8080);
+app.listen(80);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", express.static(path.join(__dirname, 'dist/movielib')));
