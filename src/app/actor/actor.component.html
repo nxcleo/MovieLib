@@ -1,0 +1,90 @@
+
+<div class="jumbotron">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Birth Year</th>
+      <th scope="col">Movies</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allActors">
+      <td>{{item.name}}</td>
+      <td>{{item.bYear}}</td>
+      <td><label *ngFor="let a of item.movies">{{a.title}} &nbsp;</label></td>
+      <td><button type="button" class="btn btn-danger btn-sm"(click)="onDeleteActor(item._id)">Remove</button> &nbsp;
+        <button type="button" class="btn btn-warning btn-sm"(click)="showModify(item)">Modify</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="jumbotron" *ngIf="select == 1">
+  <h3>Add New Actor</h3>
+  <div class="form-group">
+    <label for="form_name">Name</label>
+    <input [(ngModel)]="name" type="text" class="form-control" id="form_name" name="name">
+  </div>
+  <p></p>
+  <div class="form_date">
+    <label for="form_date">Birth Year</label>
+    <input [(ngModel)]="byear" type="number" class="form-control" id="form_date" name="date">
+  </div>
+  <p></p>
+
+  <div class="form-group">
+    <label for="form_status">Movies</label>
+    <br />
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-info" *ngFor="let item of selectedMovies" (click)="deselect(item._id)">{{item.title}}</button>
+    </div>
+    <div style="padding-top: 20px">
+      <select [(ngModel)]="movie" name="status" id="form_status" class="form-control" style="width: 80%; float: left;">
+        <option *ngFor="let item of avaliables" value={{item._id}}>{{item.title}}</option>
+      </select>
+      <button type="button" class="btn btn-light" (click)="addMovie()" style="float: right;">Add Movie</button>
+    </div>
+
+  </div>
+
+  <div style="padding-top: 50px">
+    <button class="btn btn-primary" (click)="onCreateActor()">Save Actor</button>
+  </div>
+</div>
+
+<div class="jumbotron" *ngIf="select == 2">
+  <h3>Modify Actor: {{modObj.name}}</h3>
+  <div class="form-group">
+    <label for="form_name">Name</label>
+    <input [(ngModel)]="name" type="text" class="form-control" name="name">
+  </div>
+  <p></p>
+  <div class="form_date">
+    <label for="form_date">Birth Year</label>
+    <input [(ngModel)]="byear" type="number" class="form-control" name="date">
+  </div>
+  <p></p>
+
+  <div class="form-group">
+    <label for="form_status">Movies</label>
+    <br />
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-info" *ngFor="let item of selectedMovies" (click)="deselect(item._id)">{{item.title}}</button>
+    </div>
+    <div style="padding-top: 20px">
+      <select [(ngModel)]="movie" class="form-control" style="width: 80%; float: left;">
+        <option *ngFor="let item of avaliables" value={{item._id}}>{{item.title}}</option>
+      </select>
+      <button type="button" class="btn btn-light" (click)="addMovie()" style="float: right;">Add Movie</button>
+    </div>
+
+  </div>
+
+  <div style="padding-top: 50px">
+    <button class="btn btn-primary" (click)="onUpdateActor()">Modify Actor</button>
+    &nbsp;
+    <button class="btn btn-secondary" (click)="reset()">Cancel</button>
+  </div>
+</div>

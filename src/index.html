@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Movielib</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+
+<script type="text/javascript">
+  postData = function (url, data) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+  };
+  addSamples = function ()
+  {
+    postData('/actors', {
+      name: "Jam",
+      bYear: 1998,
+      movies: []
+    });
+    postData('/actors', {
+      name: "Kevin",
+      bYear: 1998,
+      movies: []
+    });
+    postData('/movies', {
+      title: "life of 2095",
+      year: 2018,
+      actors: []
+    });
+    postData('/movies', {
+      title: "green coder",
+      year: 2017,
+      actors: []
+    });
+  }
+</script>
+</html>
